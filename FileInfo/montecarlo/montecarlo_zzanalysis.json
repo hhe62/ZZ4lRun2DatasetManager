@@ -29,13 +29,6 @@
         "Source of k-factor" : "k factor from mll only calculation of Grazzini",
         "DAS Name" : "ZZTo4L_13TeV_powheg_pythia8"
     },
-    "zz4l-amcatnlo" : {
-        "cross_section" : 1.5,
-        "Source of cross section" : "McM",
-        "DAS Name" : "ZZTo4L_13TeV-amcatnloFXFX-pythia8",
-        "Generator" : "MadGraph5_aMC@NLO NLO FxFx 0,1j",
-        "Cards" : ""
-    },
     "zz2l2q" : {
         "cross_section" : 3.38,
         "Source of cross section" : "MCM",
@@ -232,7 +225,7 @@
         "DAS Name" : "ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8"
     },
     "ZZJJTo4L-EWK" : { 
-        "cross_section" : 0.0004404,
+        "cross_section" : 0.000427,
         "Source of cross section" : "MCM",
         "DAS Name" : "ZZJJTo4L_EWK_13TeV-madgraph-pythia8"
     },

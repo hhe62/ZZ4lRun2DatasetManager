@@ -11,14 +11,15 @@ import json
 
 ############################
 ## variables:
-fullPath = "testSplit/original/*" #! Need to have the form of /full path/*
+#fullPath = "/hdfs/store/user/hhe62/ZZ4l2018AnalysisJobs_2022-10-26/2022-10-26-ZZJJTo4L-EWK-ZZ4l2018-loosePreselectionTo4lmass-v1/*" #! Need to have the form of /full path/*
+fullPath = "/hdfs/store/user/hhe62/ZZ4l2018AnalysisJobs_2022-10-26/2022-10-26-zz4l-powheg-ZZ4l2018-loosePreselectionTo4lmass-v1/*"
 dir = fullPath.rsplit("/*",1)[0]
-dataset = "ZZJJTo4L-EWK" #! Name of dataset to put in json file
-plot_group = "zzjj4l-ewk" #! Name of plot_group to put in json file
-split = 5 #! Number of subfolders
+dataset = "zz4l-powheg" #"ZZJJTo4L-EWK" #! Name of dataset to put in json file
+plot_group = "qqZZ_powheg" #"zzjj4l-ewk" #! Name of plot_group to put in json file
+split = 12 #! Number of subfolders
 outputList = True #! Write a json file
-outputname = "splitEWK.json" #! Name of output json file
-turnoffWrite = True #! Turn off write permission of the original folder to avoid accidental modification
+outputname = "splitPOWHEG.json" #! Name of output json file
+turnoffWrite = False #! Turn off write permission of the original folder to avoid accidental modification
 resumeWrite = False #! Recover write permission of the original folder at the end
 ############################
 
@@ -37,7 +38,7 @@ for n in range(0,split):
 #! Split and copy files to folders
 for ind, file in enumerate(files):
     nd = ind % split
-    temp_cp = subprocess.run("rsync -avh %s %s"%(file, dir+"_split"+str(nd)),shell=True,capture_output=True,text=True,check=True)
+    temp_cp = subprocess.run("cp %s %s"%(file, dir+"_split"+str(nd)),shell=True,capture_output=True,text=True,check=True)
     print(temp_cp.stdout)
 
 if outputList:
@@ -54,3 +55,5 @@ if turnoffWrite and resumeWrite:
     #! Turn back on write permission of the folder 
     nowrite2 = subprocess.run("chmod -R u+w %s"%dir,shell=True,capture_output=True,text=True,check=True)
     print(nowrite2.stdout)
+
+print("Dataset splitting done.")

@@ -1,26 +1,40 @@
 import glob
 import subprocess
 import json
+import sys
 
 ############################
 ## USAGE
 ## set the variables below, and run "python splitDataset.py"
+## or use "python splitDataset.py path dataset plotgroup"
 ## fullPath should be strictly of the form /full path/* with only one "*" and it is at the end
 ## The data files in /full path/ will be splitted and copied into several folders
-
-
 ############################
+
 ## variables:
+
 #fullPath = "/hdfs/store/user/hhe62/ZZ4l2018AnalysisJobs_2022-10-26/2022-10-26-ZZJJTo4L-EWK-ZZ4l2018-loosePreselectionTo4lmass-v1/*" #! Need to have the form of /full path/*
 fullPath = "/hdfs/store/user/hhe62/ZZ4l2018AnalysisJobs_2022-10-26/2022-10-26-zz4l-powheg-ZZ4l2018-loosePreselectionTo4lmass-v1/*"
+if len(sys.argv)>1:
+    fullPath = sys.argv[1]
 dir = fullPath.rsplit("/*",1)[0]
-dataset = "zz4l-powheg" #"ZZJJTo4L-EWK" #! Name of dataset to put in json file
-plot_group = "qqZZ_powheg" #"zzjj4l-ewk" #! Name of plot_group to put in json file
+
+#! Name of dataset to put in json file
+dataset = "zz4l-powheg" #"ZZJJTo4L-EWK"
+if len(sys.argv>2):
+    dataset = sys.argv[2] 
+
+#! Name of plot_group to put in json file
+plot_group = "qqZZ_powheg" #"zzjj4l-ewk" 
+if len(sys.argv>3):
+    plot_group = sys.argv[3] 
+
 split = 12 #! Number of subfolders
 outputList = True #! Write a json file
-outputname = "splitPOWHEG.json" #! Name of output json file
+outputname = "split%s.json"%dataset #! Name of output json file
 turnoffWrite = False #! Turn off write permission of the original folder to avoid accidental modification
 resumeWrite = False #! Recover write permission of the original folder at the end
+
 ############################
 
 files = glob.glob(fullPath)
